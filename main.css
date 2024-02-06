@@ -1,0 +1,24 @@
+.nameparent {
+    padding-top: 2vw;
+    padding: 5vw;
+}
+.nametitle {
+    font-size: 10vw;
+}
+.subscript {
+    font-size: 2vw;
+    text-align: right;   
+    padding-bottom: 6vw; 
+}
+.aboutmetitle{
+    display: flex;
+    justify-content: center;
+    font-variant: small-caps;
+    font-size: 5vw;
+    padding: 5vw;
+}
+.aboutpara{
+    font-size: 2vw;
+    padding: 5vw;
+    text-align: center;
+}
