@@ -1,45 +1,78 @@
 <!DOCTYPE html>
 <html>
-  <link rel="stylesheet" type="text/css" href="main.css">
-  <head>
-  <title>Skills</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <head>
+    <title>Skills</title>
 </head>
 <body>
-  <div id="navbar-placeholder"></div>
-    <script src="navbar.js"></script>
-    <style>
-        .skill-card {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            align-items: center;
-            width: 30vw;
-            padding: 1rem;
-            margin: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+    <div id="navbar-placeholder"></div>
+        <script src="navbar.js"></script>
+                <style>
+            .cards {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(40vw, 1fr));
+                gap: 1rem;
+                padding: 1vw;
+                overflow-x: auto;
+            }
 
-        .skill-card img {
-            width: 100%;
-            max-width: 200px;
-            height: auto;
-            margin-bottom: 1rem;
-        }
+            .skill-card {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                align-items: center;
+                padding: 5vw;
+                padding-bottom: 0.1vw;
+                margin: 5vw;
+                border: 0.5vw solid rgb(48, 155, 155);
+
+                border-radius: 2vw;
+                box-shadow: 0 2vw 2vw rgba(43, 75, 108, 0.1);
+                transition: transform 0.3s ease;
+                font-size: 2vw;
+            }
+
+            .skill-card:hover {
+                transform: scale(1.1);
+            }
+
+            .skill-card img {
+                padding: 1vw;
+                width: 100%;
+                height: auto;
+            }
     </style>
     <div class="cards">
     <div class="skill-card">
-        <img src="path/to/skill1.png" alt="Skill 1">
-        <h3>Skill 1</h3>
-        <p>Description of Skill 1</p>
+        <img src="resources/psolve.jpeg" alt="Skill 1">
+        <h3>Problem Solving</h3>
     </div>
 
     <div class="skill-card">
-        <img src="path/to/skill2.png" alt="Skill 2">
-        <h3>Skill 2</h3>
-        <p>Description of Skill 2</p>
+        <img src="resources/python.png" alt="Skill 2">
+        <h3>Python</h3>
     </div>
+
+    <div class="skill-card">
+        <img src="resources/c++.png" alt="Skill 3">
+        <h3>C++</h3>
+    </div>
+
+    <div class="skill-card">
+        <img src="resources/linux.png" alt="Skill 4">
+        <h3>Linux</h3>
+    </div>
+
+    <div class="skill-card">
+        <img src="resources/docker.png" alt="Skill 5">
+        <h3>Docker</h3>
+    </div>
+    
+    <div class="skill-card">
+        <img src="resources/arduino.png" alt="Skill 6">
+        <h3>Arduino</h3>
+    </div>
+
     </div>
     <!-- Add more skill cards as needed -->
 </body>

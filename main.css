@@ -22,3 +22,32 @@
     padding: 5vw;
     text-align: center;
 }
+
+#socials {
+    padding-top: 4vw;
+    display: flexbox;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    /* margin-left: 10vw; */
+    /* margin-right: 10vw;     */
+}
+#socials a,img{
+    align-self: center;
+    padding: 4.3vw;
+    padding-bottom: 10vw;
+    width: 5vw;
+} 
+#downloadfather {
+    display: flex;
+    justify-content: center;
+    padding: 5vw;
+}
+#download {
+    border-radius: 1vw;
+    box-shadow: 0.5vw 0.5vw 0.5vw 0.5vw #28465d;
+    padding: 1vw;
+    font-size: 4vw;
+background-color: rgba(42, 83, 115, 0.507);
+}

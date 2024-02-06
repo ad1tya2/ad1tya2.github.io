@@ -33,6 +33,7 @@
         box-shadow: 3vw 3vw 2vw  rgb(43, 86, 86);
         margin: 2vw;
         transition: 500ms;
+        margin-bottom: 7vw;
     }
     .title {
         font-size: 6vw;
@@ -72,6 +73,27 @@
         box-shadow: 5vw 5vw 5vw 1vw rgb(58, 101, 101) ;
         background-color: rgb(86, 186, 186);
     }
+    #commsection img{
+        max-width: 2vw;
+    }
+    #commsection {
+        font-size: 1.3vw;
+    }
+    #addcomment form button{
+        padding: 2vw;
+        font-size: 3vw;
+        border:0.5vw solid rgb(58, 101, 101);
+        border-radius: 0.3vw; 
+    }
+    #addcomment form input{
+        padding: 2vw;
+        height: 1vw;
+        width: 40vw;
+        font-size: 3vw;
+    }
+    #comment {
+        padding: 2vw;
+    }
 </style>
 <body>
   <div id="navbar-placeholder"></div>
@@ -83,14 +105,101 @@
       
       
       let str = window.location.hash;
+      let val,name; //globals
+      function getLikeImg(liked){
+            if(liked){
+                return "/resources/heart.png";
+            } else {
+                return "/resources/likegrey.png";
+            }
+        }
+      const toggleLike = function (index=-1){
+            if(index==-1)
+            {   
+                if(val.isliked){
+                val.isliked=false;
+            val.likes--;
+            } else {
+                val.isliked=true;
+                val.likes++;    
+            }
+                // document.getElementById("toggleLike:-1").src = getLikeImg(val.isliked);
+            } else {
+                if(val.comments[index].isliked){
+                val.comments[index].isliked=false;
+                val.comments[index].likes--;
+            } else {
+                val.comments[index].isliked=true;
+                val.comments[index].likes++;
+            }
+                // document.getElementById("toggleLike:"+index).src = getLikeImg(val.comments[index].isliked);
+            }
+            localStorage.setItem('blog:'+name, JSON.stringify(val));
+            repaintcomms();
+    }
+
+    function repaintcomms(){
+        genBlogComments(name).then((data) => {
+            document.getElementById('commsection').innerHTML = data;
+        });
+    }
+    function addcomment(){
+        val.comments.push({comment: document.getElementsByName('content')[0].value, likes: 0, isliked: false});
+        localStorage.setItem('blog:'+name, JSON.stringify(val));
+        repaintcomms();
+    }
+      async function genBlogComments(str){
+        name = str;
+        const defaultData = {
+            likes: 50,
+            isliked:false,
+            comments: [{
+                comment: "This is a great blog!",
+                likes: 10,
+                isliked: false
+            },
+            {
+                comment: "Damn",
+                likes: 3,
+                isliked: false
+            }
+        ]
+        }
+        val = localStorage.getItem('blog:'+name);
+        if(!val){
+            val = defaultData;
+        } else 
+        val = JSON.parse(val);
+        let likes = val.likes;
+        let i=0;
+        let comments = val.comments.map((comment) => {
+            let div = document.createElement('div');
+            div.id="comment";
+            div.innerHTML = `<div>Comment: ${comment.comment}</div><div>Likes: ${comment.likes}</div> 
+            <div><img src="${getLikeImg(comment.isliked)}" id="toggleLike:${i}" onclick="toggleLike(${i});"/></div>
+            `;
+            i++;
+            console.log(div.outerHTML);
+            return div.outerHTML;
+        });
+        return `
+        <div id='commsection'><h2>Post Likes: ${likes} </h2><img style="max-width: 4vw"src="${getLikeImg(val.isliked)}" id="toggleLike:-1" onclick="toggleLike();"/> 
+    ` +`<h1>Comments: </h1>`+ comments.join('') + `
+    <div id="addcomment"><form onsubmit='addcomment();'>
+        <input type="text" name="content" required='true'></input>
+        <button type="submit">Add Comment</button>
+        </form> </div></div>
+    `;
+      }
+
       (async function f() {
         if(str){
         str = str.slice(1);
-        console.log(str);
         let blog = await (await fetch("/blogs/"+str+".html")).text();
         // let doc = document.createElement('div');
         //   doc.innerHTML = blog;
-          document.getElementById('soloblog').innerHTML =  blog;
+          document.getElementById('soloblog').innerHTML =  blog+ await genBlogComments(str);
+          document.title = document.getElementsByClassName('title')[0].innerHTML;
        } else {
         //slightly inefficient but works.
         // max 10 blogs displayed

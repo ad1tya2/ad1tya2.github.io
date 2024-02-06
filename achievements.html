@@ -4,9 +4,39 @@
   <head>
   <title>Achievements</title>
 </head>
+<style>
+    #achievements {
+      padding: 5vw;
+      width: 100%;
+      border-spacing: 5vw;
+      font-size: 2vw;
+    }
+
+    #achievements th {
+      background-color: #f2f2f2;
+      color: #333;
+      font-weight: bold;
+      padding: 12px;
+      text-align: left;
+    }
+
+    #achievements td {
+      border-bottom: 1px solid #a5bcee;
+      padding: 8px;
+    }
+    #achievements tr td:first-child {
+        text-align: center;
+    }
+  </style>
 <body>
   <div id="navbar-placeholder"></div>
     <script src="navbar.js"></script>
-
+    <table id="achievements">
+        <tr><td>Dec 2023</td><td>Won BuzzCTF  </td></tr>
+        <tr><td>Aug 2023</td><td>Joined IIIT-H</td></tr>
+        <tr><td>2023</td><td>Finished JEE in the top 0.5th percentile</td></tr>
+        <tr><td>2017</td><td>Karate White Senior Belt</td></tr>
+        <tr><td>2013</td><td>Won Lemon Race</td></tr>
+    </table>
 </body>
 </html>
