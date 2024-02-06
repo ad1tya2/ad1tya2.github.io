@@ -108,9 +108,9 @@
       let val,name; //globals
       function getLikeImg(liked){
             if(liked){
-                return "/resources/heart.png";
+                return "./resources/heart.png";
             } else {
-                return "/resources/likegrey.png";
+                return "./resources/likegrey.png";
             }
         }
       const toggleLike = function (index=-1){
@@ -195,7 +195,7 @@
       (async function f() {
         if(str){
         str = str.slice(1);
-        let blog = await (await fetch("/blogs/"+str+".html")).text();
+        let blog = await (await fetch("./blogs/"+str+".html")).text();
         // let doc = document.createElement('div');
         //   doc.innerHTML = blog;
           document.getElementById('soloblog').innerHTML =  blog+ await genBlogComments(str);
@@ -205,7 +205,7 @@
         // max 10 blogs displayed
         for(let i=0;i<blogs.length && i<10;i++)
         {
-          let blog = await (await fetch("/blogs/"+blogs[i]+".html")).text();
+          let blog = await (await fetch("./blogs/"+blogs[i]+".html")).text();
           let doc = document.createElement('tmp');
             doc.innerHTML = blog;
         //   console.log(doc.getElements('title'));
