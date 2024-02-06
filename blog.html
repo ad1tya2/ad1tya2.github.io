@@ -2,11 +2,33 @@
 <html>
   <link rel="stylesheet" type="text/css" href="main.css">
   <head>
-  <title>About me</title>
+  <title>Blogs@ad1tya2</title>
 </head>
 <body>
   <div id="navbar-placeholder"></div>
     <script src="navbar.js"></script>
-
+    <script>
+      // add in order of latest
+      const blogs = ["linefollowerv1.html"];
+      let str = window.location.hash;
+      (async function f() {
+        if(str){
+        str = str.slice(1);
+        console.log(str);
+       } else {
+        //slightly inefficient but works.
+        // max 10 blogs displayed
+        for(let i=0;i<blogs.length && i<10;i++)
+        {
+          let blog = await fetch("/blogs/"+blogs[i]);
+          blog = await blog.text();
+          let doc = blog;
+          document.getElementById('mainblog').innerHTML=blog;
+        }
+      }
+      })();
+      
+    </script>
+    <div id="mainblog"></div>
 </body>
 </html>
