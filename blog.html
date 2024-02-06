@@ -4,31 +4,118 @@
   <head>
   <title>Blogs@ad1tya2</title>
 </head>
+<style>
+    #mtitle {
+        font-size: 4vw;
+        padding: 2vw;
+    }
+    #mdate {
+        justify-self: right;
+        font-size: 2vw;
+        padding: 2vw;
+    }
+    #mdesc {
+        font-size: 2vw;
+        padding: 1vw;
+    }
+    #mainblog {
+        padding: 5vw;
+        display: flexbox;
+        justify-content: center;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    #blogcard {
+        /* display: flexbox; */
+        padding: 2vw;
+        border-radius: 3vw;
+        border: 0.2vw solid rgb(86, 186, 186);
+        box-shadow: 3vw 3vw 2vw  rgb(43, 86, 86);
+        margin: 2vw;
+        transition: 500ms;
+    }
+    .title {
+        font-size: 6vw;
+        padding: 2vw;
+    }
+    .date {
+        justify-self: right;
+        font-size: 2vw;
+        padding: 2vw;
+    }
+    .description {
+        display: none;    
+    }
+    #contenttitle {
+        font-size: 3vw;
+        text-decoration: underline;
+        padding: 2vw;
+    }
+    #soloblog {
+        padding: 5vw;
+    }
+    #intro {
+        font-size: 1.5vw;
+        padding-left: 3.5vw;
+    }
+    #main{
+        display: flexbox;
+        font-size: 2vw;
+        padding: 2vw;
+
+    }
+    a {
+        text-decoration: underline;
+        color: rgb(59, 122, 113);
+    }
+    #blogcard:hover {
+        box-shadow: 5vw 5vw 5vw 1vw rgb(58, 101, 101) ;
+        background-color: rgb(86, 186, 186);
+    }
+</style>
 <body>
   <div id="navbar-placeholder"></div>
     <script src="navbar.js"></script>
     <script>
+
       // add in order of latest
-      const blogs = ["linefollowerv1.html"];
+      const blogs = ["linefollowerv1", "cars3"];
+      
+      
       let str = window.location.hash;
       (async function f() {
         if(str){
         str = str.slice(1);
         console.log(str);
+        let blog = await (await fetch("/blogs/"+str+".html")).text();
+        // let doc = document.createElement('div');
+        //   doc.innerHTML = blog;
+          document.getElementById('soloblog').innerHTML =  blog;
        } else {
         //slightly inefficient but works.
         // max 10 blogs displayed
         for(let i=0;i<blogs.length && i<10;i++)
         {
-          let blog = await fetch("/blogs/"+blogs[i]);
-          blog = await blog.text();
-          let doc = blog;
-          document.getElementById('mainblog').innerHTML=blog;
+          let blog = await (await fetch("/blogs/"+blogs[i]+".html")).text();
+          let doc = document.createElement('tmp');
+            doc.innerHTML = blog;
+        //   console.log(doc.getElements('title'));
+          let title = doc.getElementsByClassName('title')[0];
+            let date = doc.getElementsByClassName('date')[0];
+            let description = doc.getElementsByClassName('description')[0];
+            let adddiv = document.createElement('div');
+            adddiv.id = 'blogcard';
+            adddiv.innerHTML = 
+            `<a href = '/blog.html#${blogs[i]}' target='_blank'><div id='mtitle'">${title.innerHTML}</div></a> 
+            <div id='mdate'>${date.innerHTML}</div>
+            <div id='mdesc'>${description.innerHTML}</div>`;
+                document.getElementById('mainblog').appendChild(adddiv);
         }
       }
       })();
       
     </script>
     <div id="mainblog"></div>
+    <div id="soloblog"></div>
 </body>
 </html>
